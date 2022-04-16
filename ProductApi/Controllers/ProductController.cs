@@ -34,6 +34,17 @@ namespace ProductApi
 
             return Ok(product);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetProductById([FromRoute] int id)
+        {
+            var product = products.FirstOrDefault(products => products.Id == id);
+
+            if (product == null)
+                return NotFound();
+            else
+                return Ok(product);
+        }
     }
 }
 
