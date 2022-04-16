@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using System.Text;
@@ -36,7 +37,9 @@ builder.Services.AddAuthentication(
         };
     });
 
-builder.Services.AddOcelot();
+builder.Services.AddOcelot().AddCacheManager(
+        settings => settings.WithDictionaryHandle()
+    );
 
 var app = builder.Build();
 
